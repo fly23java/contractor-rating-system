@@ -1,6 +1,9 @@
 @extends('layouts.app')
 @section('content')
-<h1>Dashboard (Supervisor)</h1>
+<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+    <h1>Dashboard (Supervisor)</h1>
+    <a href="{{ route('users.index') }}" class="btn btn-outline" style="background: white; border: 2px solid var(--primary); color: var(--primary);">👥 Manage Users</a>
+</div>
 
 <div class="card" style="margin-bottom: 2rem;">
     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">

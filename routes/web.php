@@ -42,4 +42,7 @@ Route::middleware('auth')->group(function () {
     // Supervisor Tender Management
     Route::get('tenders/{tender}/weights', [TenderController::class, 'editWeights'])->name('tenders.weights.edit');
     Route::put('tenders/{tender}/weights', [TenderController::class, 'updateWeights'])->name('tenders.weights.update');
+
+    // User Management
+    Route::resource('users', \App\Http\Controllers\UserController::class);
 });
