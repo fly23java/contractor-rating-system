@@ -22,6 +22,7 @@ Route::middleware('auth')->group(function () {
     // Owner Routes
     Route::resource('tenders', TenderController::class);
     Route::get('tenders/{tender}/export-pdf', [TenderController::class, 'exportPdf'])->name('tenders.export-pdf');
+    Route::get('tenders/{tender}/print-pdf', [TenderController::class, 'printPdf'])->name('tenders.print-pdf');
     
     // Contractor Routes
     Route::get('tenders/{tender}/apply', [ApplicationController::class, 'create'])->name('applications.create');

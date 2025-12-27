@@ -102,4 +102,18 @@ class TenderController extends Controller
 
         return $pdf->download('tender-' . $tender->id . '-ranking.pdf');
     }
+
+    public function printPdf(Tender $tender)
+    {
+        if (Auth::user()->role !== 'owner') abort(403);
+        if ($tender->user_id !== Auth::id()) abort(403);
+
+        $accepted = $tender->applications()->where('is_excluded', false)
+            ->orderBy('weighted_total', 'desc')
+            ->get();
+        
+        $excluded = $tender->applications()->where('is_excluded', true)->get();
+
+        return view('tenders.print', compact('tender', 'accepted', 'excluded'));
+    }
 }

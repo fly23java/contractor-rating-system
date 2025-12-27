@@ -9,7 +9,9 @@
         <h1 style="margin-bottom: 0.5rem;">{{ $tender->title }}</h1>
         <p style="color: var(--text-muted);">Deadline: {{ $tender->deadline }} | Budget: ${{ number_format($tender->min_price) }} - ${{ number_format($tender->max_price) }}</p>
     </div>
-    <a href="{{ route('tenders.export-pdf', $tender) }}" class="btn btn-primary">📄 Export PDF</a>
+    <div>
+        <a href="{{ route('tenders.print-pdf', $tender) }}" target="_blank" class="btn btn-primary">🖨️ Print Report</a>
+    </div>
 </div>
 
 <div class="card">
