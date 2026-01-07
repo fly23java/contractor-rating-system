@@ -13,16 +13,16 @@ return new class extends Migration
     {
         Schema::table('tenders', function (Blueprint $table) {
             // Add weight fields for each criterion (percentages)
-            $table->decimal('weight_price', 5, 2)->default(11.44)->after('status');
-            $table->decimal('weight_quality', 5, 2)->default(11.26)->after('weight_price');
-            $table->decimal('weight_financial_capability', 5, 2)->default(11.20)->after('weight_quality');
-            $table->decimal('weight_experience', 5, 2)->default(11.14)->after('weight_financial_capability');
-            $table->decimal('weight_contract_terms', 5, 2)->default(11.03)->after('weight_experience');
-            $table->decimal('weight_field_experience', 5, 2)->default(10.97)->after('weight_contract_terms');
-            $table->decimal('weight_executive_capability', 5, 2)->default(10.73)->after('weight_field_experience');
-            $table->decimal('weight_post_service', 5, 2)->default(9.00)->after('weight_executive_capability');
-            $table->decimal('weight_guarantees', 5, 2)->default(8.56)->after('weight_post_service');
-            $table->decimal('weight_safety', 5, 2)->default(7.67)->after('weight_guarantees');
+            $table->decimal('weight_price', 5, 2)->default(11.16)->after('status');
+            $table->decimal('weight_quality', 5, 2)->default(10.90)->after('weight_price');
+            $table->decimal('weight_financial_capability', 5, 2)->default(10.90)->after('weight_quality');
+            $table->decimal('weight_experience', 5, 2)->default(10.87)->after('weight_financial_capability');
+            $table->decimal('weight_contract_terms', 5, 2)->default(10.75)->after('weight_experience');
+            $table->decimal('weight_field_experience', 5, 2)->default(10.61)->after('weight_contract_terms');
+            $table->decimal('weight_executive_capability', 5, 2)->default(10.47)->after('weight_field_experience');
+            $table->decimal('weight_post_service', 5, 2)->default(8.60)->after('weight_executive_capability');
+            $table->decimal('weight_guarantees', 5, 2)->default(8.32)->after('weight_post_service');
+            $table->decimal('weight_safety', 5, 2)->default(7.43)->after('weight_guarantees');
         });
     }
 

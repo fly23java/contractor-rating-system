@@ -136,16 +136,16 @@
 
 <script>
 function setDefaultWeights() {
-    document.getElementById('weight_price').value = 11.44;
-    document.getElementById('weight_quality').value = 11.26;
-    document.getElementById('weight_financial_capability').value = 11.20;
-    document.getElementById('weight_experience').value = 11.14;
-    document.getElementById('weight_contract_terms').value = 11.03;
-    document.getElementById('weight_field_experience').value = 10.97;
-    document.getElementById('weight_executive_capability').value = 10.73;
-    document.getElementById('weight_post_service').value = 9.00;
-    document.getElementById('weight_guarantees').value = 8.56;
-    document.getElementById('weight_safety').value = 7.67;
+    document.getElementById('weight_price').value = 11.16;
+    document.getElementById('weight_quality').value = 10.90;
+    document.getElementById('weight_financial_capability').value = 10.90;
+    document.getElementById('weight_experience').value = 10.87;
+    document.getElementById('weight_contract_terms').value = 10.75;
+    document.getElementById('weight_field_experience').value = 10.61;
+    document.getElementById('weight_executive_capability').value = 10.47;
+    document.getElementById('weight_post_service').value = 8.60;
+    document.getElementById('weight_guarantees').value = 8.32;
+    document.getElementById('weight_safety').value = 7.43;
     calculateTotal();
 }
 
