@@ -1,10 +1,10 @@
 [phases.setup]
-nixPkgs = ["php82", "php82Packages.composer", "php82Packages.calendar", "nodejs-18_x"]
+nixPkgs = ["php82", "php82Packages.composer", "nodejs-18_x"]
 
 [phases.install]
 dependsOn = ["setup"]
 cmds = [
-    "composer install --optimize-autoloader --no-scripts --no-interaction",
+    "composer install --optimize-autoloader --no-scripts --no-interaction --ignore-platform-req=ext-calendar",
     "npm install"
 ]
 
