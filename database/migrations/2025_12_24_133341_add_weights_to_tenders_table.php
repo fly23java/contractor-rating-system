@@ -22,7 +22,7 @@ return new class extends Migration
             $table->decimal('weight_executive_capability', 5, 2)->default(10.47)->after('weight_field_experience');
             $table->decimal('weight_post_service', 5, 2)->default(8.60)->after('weight_executive_capability');
             $table->decimal('weight_guarantees', 5, 2)->default(8.32)->after('weight_post_service');
-            $table->decimal('weight_safety', 5, 2)->default(7.43)->after('weight_guarantees');
+            $table->decimal('weight_safety', 5, 2)->default(7.42)->after('weight_guarantees');
         });
     }
 
