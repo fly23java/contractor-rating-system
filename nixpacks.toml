@@ -3,7 +3,7 @@ nixPkgs = ["php82", "php82Packages.composer", "nodejs-18_x"]
 
 [phases.install]
 dependsOn = ["setup"]
-cmds = ["composer install --no-interaction --optimize-autoloader --no-dev", "npm install"]
+cmds = ["composer install --optimize-autoloader --no-scripts --no-interaction --ignore-platform-req=ext-calendar", "npm install"]
 
 [phases.build]
 dependsOn = ["install"]
@@ -12,3 +12,4 @@ cmds = ["npm run build"]
 [phases.deploy]
 dependsOn = ["build"]
 cmds = ["php artisan migrate --force --seed", "php artisan serve --host=0.0.0.0 --port=${PORT:-8000}"]
+
