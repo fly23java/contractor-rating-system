@@ -46,4 +46,9 @@ Route::middleware('auth')->group(function () {
 
     // User Management
     Route::resource('users', \App\Http\Controllers\UserController::class);
+
+    // Keep Session Alive
+    Route::get('/api/keep-alive', function () {
+        return response()->json(['status' => 'active']);
+    })->name('session.keep-alive');
 });

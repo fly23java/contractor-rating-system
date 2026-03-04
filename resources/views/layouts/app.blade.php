@@ -7,6 +7,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 </head>
 <body>
     @auth
@@ -41,8 +42,13 @@
 
         <main class="main-content">
             @if(session('success'))
-                <div class="card" style="background: #ecfdf5; border: 1px solid #d1fae5; color: #065f46; padding: 1rem; animation: slideIn 0.3s ease-out;">
+                <div class="card" style="background: #ecfdf5; border: 1px solid #d1fae5; color: #065f46; padding: 1rem; animation: slideIn 0.3s ease-out; margin-bottom: 1rem;">
                     {{ session('success') }}
+                </div>
+            @endif
+            @if(session('warning'))
+                <div class="card" style="background: #fffbeb; border: 1px solid #fef3c7; color: #92400e; padding: 1rem; animation: slideIn 0.3s ease-out; margin-bottom: 1rem;">
+                    {{ session('warning') }}
                 </div>
             @endif
             @if($errors->any())
@@ -59,9 +65,56 @@
         </main>
     </div>
     @else
-        <div style="min-height: 100vh; display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);">
+        <div style="min-height: 100vh; width: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%); padding: 1rem;">
+            @if(session('warning'))
+                <div class="card" style="width: 100%; max-width: 400px; background: #fffbeb; border: 1px solid #fef3c7; color: #92400e; padding: 1rem; margin-bottom: 1rem; animation: slideIn 0.3s ease-out;">
+                    {{ session('warning') }}
+                </div>
+            @endif
             @yield('content')
         </div>
+    @endauth
+
+    @auth
+    <script>
+        /**
+         * Session Keep-Alive & Expiration Handler
+         */
+        (function() {
+            // Ping server every 5 minutes to keep session active
+            const keepAliveInterval = 5 * 60 * 1000;
+            
+            setInterval(function() {
+                fetch('{{ route("session.keep-alive") }}', {
+                    method: 'GET',
+                    headers: {
+                        'X-Requested-With': 'XMLHttpRequest',
+                        'Accept': 'application/json'
+                    }
+                }).then(response => {
+                    if (response.status === 419) {
+                        // Session expired, reload to trigger the backend redirect to login
+                        window.location.reload();
+                    }
+                }).catch(error => {
+                    console.debug('Keep-alive ping failed. User might be offline or server is down.');
+                });
+            }, keepAliveInterval);
+
+            // Global handler for AJAX errors (if using Axios)
+            if (window.axios) {
+                window.axios.interceptors.response.use(
+                    response => response,
+                    error => {
+                        if (error.response && error.response.status === 419) {
+                            window.location.reload();
+                        }
+                        return Promise.reject(error);
+                    }
+                );
+            }
+        })();
+    </script>
     @endauth
 </body>
 </html>
