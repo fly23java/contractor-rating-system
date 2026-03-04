@@ -14,27 +14,36 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         // Contractor
-        User::factory()->create([
-            'name' => 'Contractor',
-            'email' => 'contractor@example.com',
-            'role' => 'contractor',
-            'password' => bcrypt('password'),
-        ]);
+        if (!User::where('email', 'contractor@example.com')->exists()) {
+            User::factory()->create([
+                'name' => 'Contractor',
+                'email' => 'contractor@example.com',
+                'role' => 'contractor',
+                'password' => bcrypt('password'),
+            ]);
+        }
 
         // Supervisor
-        User::factory()->create([
-            'name' => 'Supervisor',
-            'email' => 'supervisor@example.com',
-            'role' => 'supervisor',
-            'password' => bcrypt('password'),
-        ]);
+        if (!User::where('email', 'supervisor@example.com')->exists()) {
+            User::factory()->create([
+                'name' => 'Supervisor',
+                'email' => 'supervisor@example.com',
+                'role' => 'supervisor',
+                'password' => bcrypt('password'),
+            ]);
+        }
 
         // Owner
-        User::factory()->create([
-            'name' => 'Owner',
-            'email' => 'owner@example.com',
-            'role' => 'owner',
-            'password' => bcrypt('password'),
-        ]);
+        if (!User::where('email', 'owner@example.com')->exists()) {
+            User::factory()->create([
+                'name' => 'Owner',
+                'email' => 'owner@example.com',
+                'role' => 'owner',
+                'password' => bcrypt('password'),
+            ]);
+        }
+
+        // Run weights update
+        $this->call(UpdateTenderWeightsSeeder::class);
     }
 }
