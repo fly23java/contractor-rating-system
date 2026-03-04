@@ -102,7 +102,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="form-label">8. الالتزام بالخدمات اللاحقة (Post-Service)</label>
+                    <label class="form-label">8. التزام المقاول بالخدمات اللاحقة (Contractor Commitment to Post-Service)</label>
                     <div style="display: flex; align-items: center; gap: 0.5rem;">
                         <input type="number" name="weight_post_service" id="weight_post_service" class="form-control" step="0.01" min="0" max="100" value="{{ old('weight_post_service', $tender->weight_post_service) }}" required>
                         <span style="color: var(--text-muted);">%</span>
@@ -145,7 +145,7 @@ function setDefaultWeights() {
     document.getElementById('weight_executive_capability').value = 10.47;
     document.getElementById('weight_post_service').value = 8.60;
     document.getElementById('weight_guarantees').value = 8.32;
-    document.getElementById('weight_safety').value = 7.43;
+    document.getElementById('weight_safety').value = 7.42;
     calculateTotal();
 }
 

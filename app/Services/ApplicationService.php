@@ -205,9 +205,9 @@ class ApplicationService
             }
         }
 
-        $app->weighted_total = round($total * 100, 2); // Convert to percentage
-        $app->technical_score = round($technical * 100, 2);
-        $app->financial_score = round($financial * 100, 2);
+        $app->weighted_total = round($total * 20, 2); // Convert to 0-100% scale (Max Grade 5 * 20 = 100)
+        $app->technical_score = round($technical * 20, 2); 
+        $app->financial_score = round($financial * 20, 2);
     }
 
     /**
@@ -231,44 +231,14 @@ class ApplicationService
             }
         }
 
-        // Rule 2: Technical score < 70% of maximum
         // Rule 2: Technical score < 70% of maximum possible technical score
-        // Maximum normalized technical score is 5 (since all grades are converted to 0-5)
-        // Weighted Technical Score = Sum(Grade * Weight). Max possible is Sum(5 * Weight) = 5 * TotalTechnicalWeight
-        
         $totalTechnicalWeight = array_sum(array_intersect_key($weights, array_flip(self::TECHNICAL_CRITERIA)));
-        $maxPossibleTechnicalScore = 5 * ($totalTechnicalWeight / 100); // e.g., if tech weight is 60%, max score is 5 * 0.6 = 3.0
-
-        // Actual technical score is already weighted (e.g., 2.1)
-        // Threshold is 70% of max possible
-        $threshold = $maxPossibleTechnicalScore * 0.70;
-
-        // However, current implementation: technical_score is normalized to 0-100 scale in calculateWeightedScore?
-        // Let's check calculateWeightedScore:
-        // $app->technical_score = round($technical * 100, 2); -> This sums (Grade * Weight/100).
-        // Max Grade is 5. So if Tech Weights sum to 60%, Max Technical is 5 * 0.6 = 3. 
-        // Then technical_score is 3 * 100 = 300? No.
-        // Let's re-verify calculateWeightedScore logic.
         
-        // RE-VERIFY LOGIC:
-        // $weighted = $grade * ($weight / 100);  -> Grade (0-5) * (Weight (e.g. 11.26)/100) = 5 * 0.1126 = 0.563
-        // $technical += $weighted;
-        // Total possible $technical (if all 5) = 5 * (TotalTechWeight/100). 
-        // If TotalTechWeight is ~70%, Max possible is 3.5.
-        // We want to exclude if score < 70% of that Max.
-        
-        $currentTechnicalScore = $app->technical_score / 100; // Convert back from percentage representation if needed, OR just use the raw sums
-        // Wait, calculateWeightedScore saves: $app->technical_score = round($technical * 100, 2);
-        // So if $technical is 2.5, saved is 250.
-        // Let's stick to using the raw $technical variable if possible, but here we are in a separate method.
-        // We need to re-calculate or assume consistency.
-        
-        // Easier: technical_score field stores the weighted sum * 100.
-        // Max possible = 5 * TotalTechnicalWeight.
-        
-        if ($app->technical_score < (5 * $totalTechnicalWeight * 0.70)) {
+        // Max possible Technical Score = TotalTechnicalWeight (since 5 * (Weight/100) * 20 = Weight)
+        // If technical weights sum to 70%, max possible score is 70 points
+        if ($app->technical_score < ($totalTechnicalWeight * 0.70)) {
              $app->is_excluded = true;
-             $app->exclusion_reason = 'Technical score below 70% threshold (' . $app->technical_score . ' < ' . (5 * $totalTechnicalWeight * 0.70) . ')';
+             $app->exclusion_reason = 'Technical score below 70% threshold (' . $app->technical_score . ' < ' . ($totalTechnicalWeight * 0.70) . ')';
              $app->excluded_at = now();
              return;
         }

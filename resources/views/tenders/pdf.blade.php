@@ -157,16 +157,16 @@
         <thead>
             <tr>
                 <th>{{ \App\Helpers\ArabicHtml::reshape('المقاول') }}</th>
-                <th>{{ \App\Helpers\ArabicHtml::reshape('السعر') }}<br>11.44%</th>
-                <th>{{ \App\Helpers\ArabicHtml::reshape('الجودة') }}<br>11.26%</th>
-                <th>{{ \App\Helpers\ArabicHtml::reshape('القدرة المالية') }}<br>11.20%</th>
-                <th>{{ \App\Helpers\ArabicHtml::reshape('الخبرة') }}<br>11.14%</th>
-                <th>{{ \App\Helpers\ArabicHtml::reshape('الشروط') }}<br>11.03%</th>
-                <th>{{ \App\Helpers\ArabicHtml::reshape('خبرة المجال') }}<br>10.97%</th>
-                <th>{{ \App\Helpers\ArabicHtml::reshape('القدرة التنفيذية') }}<br>10.73%</th>
-                <th>{{ \App\Helpers\ArabicHtml::reshape('الخدمات') }}<br>9%</th>
-                <th>{{ \App\Helpers\ArabicHtml::reshape('الضمانات') }}<br>8.56%</th>
-                <th>{{ \App\Helpers\ArabicHtml::reshape('السلامة') }}<br>7.67%</th>
+                <th>{{ \App\Helpers\ArabicHtml::reshape('السعر') }}<br>{{ $tender->weight_price }}%</th>
+                <th>{{ \App\Helpers\ArabicHtml::reshape('الجودة') }}<br>{{ $tender->weight_quality }}%</th>
+                <th>{{ \App\Helpers\ArabicHtml::reshape('القدرة المالية') }}<br>{{ $tender->weight_financial_capability }}%</th>
+                <th>{{ \App\Helpers\ArabicHtml::reshape('الخبرة') }}<br>{{ $tender->weight_experience }}%</th>
+                <th>{{ \App\Helpers\ArabicHtml::reshape('الشروط') }}<br>{{ $tender->weight_contract_terms }}%</th>
+                <th>{{ \App\Helpers\ArabicHtml::reshape('خبرة المجال') }}<br>{{ $tender->weight_field_experience }}%</th>
+                <th>{{ \App\Helpers\ArabicHtml::reshape('القدرة التنفيذية') }}<br>{{ $tender->weight_executive_capability }}%</th>
+                <th>{{ \App\Helpers\ArabicHtml::reshape('الخدمات') }}<br>{{ $tender->weight_post_service }}%</th>
+                <th>{{ \App\Helpers\ArabicHtml::reshape('الضمانات') }}<br>{{ $tender->weight_guarantees }}%</th>
+                <th>{{ \App\Helpers\ArabicHtml::reshape('السلامة') }}<br>{{ $tender->weight_safety }}%</th>
             </tr>
         </thead>
         <tbody>

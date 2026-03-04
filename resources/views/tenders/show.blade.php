@@ -134,16 +134,16 @@
             <thead>
                 <tr>
                     <th>Contractor</th>
-                    <th>Price (11.44%)</th>
-                    <th>Quality (11.26%)</th>
-                    <th>Financial (11.20%)</th>
-                    <th>Experience (11.14%)</th>
-                    <th>Contract (11.03%)</th>
-                    <th>Field Exp (10.97%)</th>
-                    <th>Executive (10.73%)</th>
-                    <th>Post-Service (9%)</th>
-                    <th>Guarantees (8.56%)</th>
-                    <th>Safety (7.67%)</th>
+                    <th>Price ({{ $tender->weight_price }}%)</th>
+                    <th>Quality ({{ $tender->weight_quality }}%)</th>
+                    <th>Financial ({{ $tender->weight_financial_capability }}%)</th>
+                    <th>Experience ({{ $tender->weight_experience }}%)</th>
+                    <th>Contract ({{ $tender->weight_contract_terms }}%)</th>
+                    <th>Field Exp ({{ $tender->weight_field_experience }}%)</th>
+                    <th>Executive ({{ $tender->weight_executive_capability }}%)</th>
+                    <th>Post-Service ({{ $tender->weight_post_service }}%)</th>
+                    <th>Guarantees ({{ $tender->weight_guarantees }}%)</th>
+                    <th>Safety ({{ $tender->weight_safety }}%)</th>
                 </tr>
             </thead>
             <tbody>
