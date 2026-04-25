@@ -12,6 +12,10 @@ class Application extends Model
 
     protected $guarded = [];
 
+    protected $casts = [
+        'excluded_at' => 'datetime',
+    ];
+
     public function tender(): BelongsTo
     {
         return $this->belongsTo(Tender::class);
